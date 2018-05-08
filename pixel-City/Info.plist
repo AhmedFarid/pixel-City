@@ -32,5 +32,11 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app requires your location to pull photos from Filckr</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app requires your location to pull photos from Filckr</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app requires your location to pull photos from Filckr</string>
 </dict>
 </plist>
