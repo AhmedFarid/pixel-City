@@ -1,6 +1,7 @@
 import UIKit
 import MapKit
 import Alamofire
+import AlamofireImage
 
 
 class mapVC: UIViewController, UIGestureRecognizerDelegate{
@@ -22,6 +23,8 @@ class mapVC: UIViewController, UIGestureRecognizerDelegate{
     
     var flowLayout = UICollectionViewFlowLayout()
     var collectionView: UICollectionView?
+    
+    var imageUrlArray = [String]()
     
     
     
@@ -147,9 +150,6 @@ extension mapVC: MKMapViewDelegate {
         addProgressLbl()
         
        
-        
-        
-        
         let touchPoint = sender.location(in: mapview)
         let touchCoordinte = mapview.convert(touchPoint, toCoordinateFrom: mapview)
         
@@ -161,6 +161,11 @@ extension mapVC: MKMapViewDelegate {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(touchCoordinte, regionRadius * 2, regionRadius * 2)
         mapview.setRegion(coordinateRegion, animated: true)
         
+        retrieveUrls(forAnnotation: annotation) { (true) in
+            print(self.imageUrlArray)
+            
+        }
+        
     }
     
     func removePin() {
@@ -170,6 +175,25 @@ extension mapVC: MKMapViewDelegate {
         }
     }
     
+    func retrieveUrls(forAnnotation annotation: DroppablePin, handler: @escaping (_ status: Bool) -> ()){
+        imageUrlArray = []
+        
+        Alamofire.request(flickrUrl(forApiKey: apiKay, withAnnotation: annotation, andNumberOfPhotos: 40)).responseJSON { (response) in
+            guard let json = response.result.value as? Dictionary<String,AnyObject> else { return }
+            let photoDict = json["photos"] as! Dictionary<String, AnyObject>
+            let photosDictArray = photoDict["photo"] as! [Dictionary<String, AnyObject>]
+            for photo in photosDictArray {
+                let postUrl = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!)_h_d.jpg"
+                self.imageUrlArray.append(postUrl)
+            }
+            handler(true)
+        }
+    }
+    
+    
+    func retrieveImage() {
+        
+    }
 }
 
 extension mapVC: CLLocationManagerDelegate {
