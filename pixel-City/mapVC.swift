@@ -195,7 +195,7 @@ extension mapVC: MKMapViewDelegate {
             let photoDict = json["photos"] as! Dictionary<String, AnyObject>
             let photosDictArray = photoDict["photo"] as! [Dictionary<String, AnyObject>]
             for photo in photosDictArray {
-                let postUrl = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!)_q_d.jpg"
+                let postUrl = "https://farm\(photo["farm"]!).staticflickr.com/\(photo["server"]!)/\(photo["id"]!)_\(photo["secret"]!)_z_d.jpg"
                 self.imageUrlArray.append(postUrl)
             }
             handler(true)
@@ -263,6 +263,13 @@ extension mapVC: UICollectionViewDelegate, UICollectionViewDataSource {
         let imageView = UIImageView(image: imageFromIndex)
         cell.addSubview(imageView)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let popVC = storyboard?.instantiateViewController(withIdentifier: "PopVC") as? PopVC else { return }
+        popVC.initData(forImage: imageArray[indexPath.row])
+        present(popVC, animated: true, completion: nil)
+        
     }
     
     
