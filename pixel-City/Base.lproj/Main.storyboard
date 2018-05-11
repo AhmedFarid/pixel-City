@@ -91,6 +91,24 @@
             </objects>
             <point key="canvasLocation" x="24.375" y="33.802816901408448"/>
         </scene>
+        <!--PopVC-->
+        <scene sceneID="34J-N9-4gl">
+            <objects>
+                <viewController id="usP-WV-qgi" customClass="PopVC" customModule="pixel_City" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Epu-UY-IHt"/>
+                        <viewControllerLayoutGuide type="bottom" id="sQ0-sq-Uvm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XyJ-H8-7I0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E53-n4-Ct6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="752" y="35"/>
+        </scene>
     </scenes>
     <resources>
         <image name="locationButton" width="67" height="67"/>
